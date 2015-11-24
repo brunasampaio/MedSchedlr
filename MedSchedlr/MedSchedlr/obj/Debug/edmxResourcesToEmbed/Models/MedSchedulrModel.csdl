@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedSchedlrModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="MEedSchedlrEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Consultas" EntityType="MedSchedlrModel.Consulta" />
+    <EntitySet Name="Consultorios" EntityType="MedSchedlrModel.Consultorio" />
+    <EntitySet Name="Medicos" EntityType="MedSchedlrModel.Medico" />
+    <EntitySet Name="Pacientes" EntityType="MedSchedlrModel.Paciente" />
+    <EntitySet Name="Planoes" EntityType="MedSchedlrModel.Plano" />
+    <AssociationSet Name="FK__tb_consul__idMed__1DE57479" Association="MedSchedlrModel.FK__tb_consul__idMed__1DE57479">
+      <End Role="Medico" EntitySet="Medicos" />
+      <End Role="Consulta" EntitySet="Consultas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_consul__idPac__1ED998B2" Association="MedSchedlrModel.FK__tb_consul__idPac__1ED998B2">
+      <End Role="Paciente" EntitySet="Pacientes" />
+      <End Role="Consulta" EntitySet="Consultas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_medico__idCon__173876EA1" Association="MedSchedlrModel.FK__tb_medico__idCon__173876EA1">
+      <End Role="Consultorio" EntitySet="Consultorios" />
+      <End Role="Medico" EntitySet="Medicos" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_pacien__idPla__1273C1CD1" Association="MedSchedlrModel.FK__tb_pacien__idPla__1273C1CD1">
+      <End Role="Plano" EntitySet="Planoes" />
+      <End Role="Paciente" EntitySet="Pacientes" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Consulta">
+    <Key>
+      <PropertyRef Name="idConsulta" />
+    </Key>
+    <Property Name="idConsulta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idMedico" Type="Int32" Nullable="false" />
+    <Property Name="idPaciente" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Medico" Relationship="MedSchedlrModel.FK__tb_consul__idMed__1DE57479" FromRole="Consulta" ToRole="Medico" />
+    <NavigationProperty Name="Paciente" Relationship="MedSchedlrModel.FK__tb_consul__idPac__1ED998B2" FromRole="Consulta" ToRole="Paciente" />
+  </EntityType>
+  <EntityType Name="Consultorio">
+    <Key>
+      <PropertyRef Name="idConsultorio" />
+    </Key>
+    <Property Name="idConsultorio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="endereco" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Medicos" Relationship="MedSchedlrModel.FK__tb_medico__idCon__173876EA1" FromRole="Consultorio" ToRole="Medico" />
+  </EntityType>
+  <EntityType Name="Medico">
+    <Key>
+      <PropertyRef Name="idMedico" />
+    </Key>
+    <Property Name="idMedico" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="especialidade" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="idConsultorio" Type="Int32" Nullable="false" />
+    <Property Name="crm" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Consultas" Relationship="MedSchedlrModel.FK__tb_consul__idMed__1DE57479" FromRole="Medico" ToRole="Consulta" />
+    <NavigationProperty Name="Consultorio" Relationship="MedSchedlrModel.FK__tb_medico__idCon__173876EA1" FromRole="Medico" ToRole="Consultorio" />
+  </EntityType>
+  <EntityType Name="Paciente">
+    <Key>
+      <PropertyRef Name="idPaciente" />
+    </Key>
+    <Property Name="idPaciente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nome" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="endereco" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="idPlano" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Consultas" Relationship="MedSchedlrModel.FK__tb_consul__idPac__1ED998B2" FromRole="Paciente" ToRole="Consulta" />
+    <NavigationProperty Name="Plano" Relationship="MedSchedlrModel.FK__tb_pacien__idPla__1273C1CD1" FromRole="Paciente" ToRole="Plano" />
+  </EntityType>
+  <EntityType Name="Plano">
+    <Key>
+      <PropertyRef Name="idPlano" />
+    </Key>
+    <Property Name="idPlano" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tipoPlano" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="acomodacao" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Pacientes" Relationship="MedSchedlrModel.FK__tb_pacien__idPla__1273C1CD1" FromRole="Plano" ToRole="Paciente" />
+  </EntityType>
+  <Association Name="FK__tb_consul__idMed__1DE57479">
+    <End Type="MedSchedlrModel.Medico" Role="Medico" Multiplicity="1" />
+    <End Type="MedSchedlrModel.Consulta" Role="Consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medico">
+        <PropertyRef Name="idMedico" />
+      </Principal>
+      <Dependent Role="Consulta">
+        <PropertyRef Name="idMedico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_consul__idPac__1ED998B2">
+    <End Type="MedSchedlrModel.Paciente" Role="Paciente" Multiplicity="1" />
+    <End Type="MedSchedlrModel.Consulta" Role="Consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paciente">
+        <PropertyRef Name="idPaciente" />
+      </Principal>
+      <Dependent Role="Consulta">
+        <PropertyRef Name="idPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_medico__idCon__173876EA1">
+    <End Type="MedSchedlrModel.Consultorio" Role="Consultorio" Multiplicity="1" />
+    <End Type="MedSchedlrModel.Medico" Role="Medico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultorio">
+        <PropertyRef Name="idConsultorio" />
+      </Principal>
+      <Dependent Role="Medico">
+        <PropertyRef Name="idConsultorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_pacien__idPla__1273C1CD1">
+    <End Type="MedSchedlrModel.Plano" Role="Plano" Multiplicity="1" />
+    <End Type="MedSchedlrModel.Paciente" Role="Paciente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Plano">
+        <PropertyRef Name="idPlano" />
+      </Principal>
+      <Dependent Role="Paciente">
+        <PropertyRef Name="idPlano" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

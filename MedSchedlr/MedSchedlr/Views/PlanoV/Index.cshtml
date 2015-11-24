@@ -1,0 +1,39 @@
+﻿@model IEnumerable<MedSchedlr.Models.Plano>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.tipoPlano)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.acomodacao)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.tipoPlano)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.acomodacao)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idPlano }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idPlano }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idPlano })
+        </td>
+    </tr>
+}
+
+</table>

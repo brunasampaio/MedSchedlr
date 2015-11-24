@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MedSchedlrModelStoreContainer" CdmEntityContainer="MEedSchedlrEntities">
+    <EntitySetMapping Name="Consultas">
+      <EntityTypeMapping TypeName="MedSchedlrModel.Consulta">
+        <MappingFragment StoreEntitySet="Consulta">
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+          <ScalarProperty Name="idMedico" ColumnName="idMedico" />
+          <ScalarProperty Name="idConsulta" ColumnName="idConsulta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Consultorios">
+      <EntityTypeMapping TypeName="MedSchedlrModel.Consultorio">
+        <MappingFragment StoreEntitySet="Consultorio">
+          <ScalarProperty Name="endereco" ColumnName="endereco" />
+          <ScalarProperty Name="idConsultorio" ColumnName="idConsultorio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Medicos">
+      <EntityTypeMapping TypeName="MedSchedlrModel.Medico">
+        <MappingFragment StoreEntitySet="Medico">
+          <ScalarProperty Name="crm" ColumnName="crm" />
+          <ScalarProperty Name="idConsultorio" ColumnName="idConsultorio" />
+          <ScalarProperty Name="especialidade" ColumnName="especialidade" />
+          <ScalarProperty Name="idMedico" ColumnName="idMedico" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pacientes">
+      <EntityTypeMapping TypeName="MedSchedlrModel.Paciente">
+        <MappingFragment StoreEntitySet="Paciente">
+          <ScalarProperty Name="idPlano" ColumnName="idPlano" />
+          <ScalarProperty Name="endereco" ColumnName="endereco" />
+          <ScalarProperty Name="nome" ColumnName="nome" />
+          <ScalarProperty Name="idPaciente" ColumnName="idPaciente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Planoes">
+      <EntityTypeMapping TypeName="MedSchedlrModel.Plano">
+        <MappingFragment StoreEntitySet="Plano">
+          <ScalarProperty Name="acomodacao" ColumnName="acomodacao" />
+          <ScalarProperty Name="tipoPlano" ColumnName="tipoPlano" />
+          <ScalarProperty Name="idPlano" ColumnName="idPlano" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

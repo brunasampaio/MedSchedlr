@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MedSchedlrModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Consulta">
+    <Key>
+      <PropertyRef Name="idConsulta" />
+    </Key>
+    <Property Name="idConsulta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idMedico" Type="int" Nullable="false" />
+    <Property Name="idPaciente" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Consultorio">
+    <Key>
+      <PropertyRef Name="idConsultorio" />
+    </Key>
+    <Property Name="idConsultorio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="endereco" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Medico">
+    <Key>
+      <PropertyRef Name="idMedico" />
+    </Key>
+    <Property Name="idMedico" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="especialidade" Type="varchar" MaxLength="255" />
+    <Property Name="idConsultorio" Type="int" Nullable="false" />
+    <Property Name="crm" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Paciente">
+    <Key>
+      <PropertyRef Name="idPaciente" />
+    </Key>
+    <Property Name="idPaciente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nome" Type="varchar" MaxLength="255" />
+    <Property Name="endereco" Type="varchar" MaxLength="255" />
+    <Property Name="idPlano" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Plano">
+    <Key>
+      <PropertyRef Name="idPlano" />
+    </Key>
+    <Property Name="idPlano" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipoPlano" Type="varchar" MaxLength="255" />
+    <Property Name="acomodacao" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <Association Name="FK__tb_consul__idMed__1DE57479">
+    <End Role="Medico" Type="Self.Medico" Multiplicity="1" />
+    <End Role="Consulta" Type="Self.Consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Medico">
+        <PropertyRef Name="idMedico" />
+      </Principal>
+      <Dependent Role="Consulta">
+        <PropertyRef Name="idMedico" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_consul__idPac__1ED998B2">
+    <End Role="Paciente" Type="Self.Paciente" Multiplicity="1" />
+    <End Role="Consulta" Type="Self.Consulta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paciente">
+        <PropertyRef Name="idPaciente" />
+      </Principal>
+      <Dependent Role="Consulta">
+        <PropertyRef Name="idPaciente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_medico__idCon__173876EA">
+    <End Role="Consultorio" Type="Self.Consultorio" Multiplicity="1" />
+    <End Role="Medico" Type="Self.Medico" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Consultorio">
+        <PropertyRef Name="idConsultorio" />
+      </Principal>
+      <Dependent Role="Medico">
+        <PropertyRef Name="idConsultorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_pacien__idPla__1273C1CD">
+    <End Role="Plano" Type="Self.Plano" Multiplicity="1" />
+    <End Role="Paciente" Type="Self.Paciente" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Plano">
+        <PropertyRef Name="idPlano" />
+      </Principal>
+      <Dependent Role="Paciente">
+        <PropertyRef Name="idPlano" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="MedSchedlrModelStoreContainer">
+    <EntitySet Name="Consulta" EntityType="Self.Consulta" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Consultorio" EntityType="Self.Consultorio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Medico" EntityType="Self.Medico" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Paciente" EntityType="Self.Paciente" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Plano" EntityType="Self.Plano" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tb_consul__idMed__1DE57479" Association="Self.FK__tb_consul__idMed__1DE57479">
+      <End Role="Medico" EntitySet="Medico" />
+      <End Role="Consulta" EntitySet="Consulta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_consul__idPac__1ED998B2" Association="Self.FK__tb_consul__idPac__1ED998B2">
+      <End Role="Paciente" EntitySet="Paciente" />
+      <End Role="Consulta" EntitySet="Consulta" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_medico__idCon__173876EA" Association="Self.FK__tb_medico__idCon__173876EA">
+      <End Role="Consultorio" EntitySet="Consultorio" />
+      <End Role="Medico" EntitySet="Medico" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_pacien__idPla__1273C1CD" Association="Self.FK__tb_pacien__idPla__1273C1CD">
+      <End Role="Plano" EntitySet="Plano" />
+      <End Role="Paciente" EntitySet="Paciente" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
