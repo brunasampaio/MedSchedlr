@@ -1,0 +1,10 @@
+{
+  "AppSettings": {
+    "SiteTitle": "MedSchedlr.Web"
+  },
+  "Data": {
+    "DefaultConnection": {
+      "ConnectionString": "Server=(localdb)\\mssqllocaldb;Database=aspnet5-MedSchedlr.Web-fd7464f1-1c09-47ab-b4f4-e8ca3190d41b;Trusted_Connection=True;MultipleActiveResultSets=true"
+    }
+  }
+}
