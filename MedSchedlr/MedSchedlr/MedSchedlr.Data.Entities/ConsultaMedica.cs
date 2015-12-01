@@ -1,8 +1,12 @@
-﻿namespace MedSchedlr.Data.Entities
+﻿using System;
+
+namespace MedSchedlr.Data.Entities
 {
     public class ConsultaMedica
     {
         public int Id { get; set; }
-        public string Endereco { get; set; }
+        public Consultorio Consultorio { get; set; }
+        public Paciente Paciente { get; set; }
+        public DateTime DataHora { get; set; }
     }
 }
